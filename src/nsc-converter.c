@@ -24,7 +24,9 @@
  * 
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif
 
 #include <sys/time.h>
 #include <string.h>

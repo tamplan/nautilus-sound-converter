@@ -22,7 +22,9 @@
  * 
  */
 
-#include <config.h> /* for GETTEXT_PACKAGE */
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include "nsc-converter.h"
 #include "nsc-extension.h"
