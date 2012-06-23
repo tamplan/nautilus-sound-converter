@@ -18,7 +18,7 @@ https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter
 Hacking:
 ========
 
-n-s-c can be check out with the following command:
+n-s-c can be checked out with the following command:
 
 git clone git://git.gnome.org/nautilus-sound-converter
 
