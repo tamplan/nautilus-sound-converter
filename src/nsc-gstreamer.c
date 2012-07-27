@@ -338,7 +338,7 @@ connect_decodebin_cb (GstElement *decodebin,
         GstPad *audiopad;
 
         /* Only link once */
-        audiopad = gst_element_get_pad (data, "sink");
+        audiopad = gst_element_get_static_pad (data, "sink");
         if (GST_PAD_IS_LINKED (audiopad)) {
                 g_object_unref (audiopad);
                 return;
