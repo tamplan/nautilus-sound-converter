@@ -28,6 +28,8 @@
 #include <config.h>
 #endif
 
+#define GST_USE_UNSTABLE_API
+
 #include <sys/time.h>
 #include <string.h>
 

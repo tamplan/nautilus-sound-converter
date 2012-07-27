@@ -26,6 +26,8 @@
 #include <config.h>
 #endif
 
+#define GST_USE_UNSTABLE_API
+
 #include "nsc-converter.h"
 #include "nsc-extension.h"
 #include "nsc-gstreamer.h"

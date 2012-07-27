@@ -28,6 +28,8 @@
 #include <config.h>
 #endif
 
+#define GST_USE_UNSTABLE_API
+
 #include <string.h>
 #include <glib.h>
 #include <glib/gi18n.h>
