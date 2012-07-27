@@ -457,7 +457,6 @@ tick_timeout_cb (NscGStreamer *gstreamer)
 	gint                 secs;
 	GstState             state;
 	GstState             pending_state;
-	static GstFormat     format = GST_FORMAT_TIME;
 
 	g_return_val_if_fail (NSC_IS_GSTREAMER (gstreamer), FALSE);
 
@@ -475,7 +474,7 @@ tick_timeout_cb (NscGStreamer *gstreamer)
 	}
 
 	if (!gst_element_query_position (priv->pipeline,
-					 &format,
+					 GST_FORMAT_TIME,
 					 &nanos)) {
 		g_warning (_("Could not get current file position"));
 		return TRUE;
@@ -507,7 +506,6 @@ nsc_gstreamer_convert_file (NscGStreamer *gstreamer,
 	GstStateChangeReturn  state_ret;
 	NscGStreamerPrivate  *priv;
 	gint64                nanos;
-	static GstFormat      format = GST_FORMAT_TIME;
 
 	g_return_if_fail (NSC_IS_GSTREAMER (gstreamer));
 
@@ -577,7 +575,7 @@ nsc_gstreamer_convert_file (NscGStreamer *gstreamer,
 	}
 
 	/* Get file duration */
-	if (!gst_element_query_duration (priv->pipeline, &format, &nanos)) {
+	if (!gst_element_query_duration (priv->pipeline, GST_FORMAT_TIME, &nanos)) {
 		g_warning (_("Could not get current file duration"));
 	} else {
 		gint secs;
