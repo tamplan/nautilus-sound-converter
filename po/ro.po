@@ -1,0 +1,157 @@
+# Romanian translation for nautilus-sound-converter.
+# Copyright (C) 2011 nautilus-sound-converter's COPYRIGHT HOLDER
+# This file is distributed under the same license as the nautilus-sound-converter package.
+# neb1 <mircea.crazy@gmail.com>, 2011.
+# Lupescu Mircea <mircea.neb1@yahoo.com>, 2011.
+# Daniel Șerbănescu <daniel@serbanescu.dk>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-sound-converter master\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product"
+"=nautilus-sound-converter&keywords=I18N+L10N\n"
+"POT-Creation-Date: 2012-07-28 21:57+0000\n"
+"PO-Revision-Date: 2012-08-05 20:32+0200\n"
+"Last-Translator: Daniel Șerbănescu <daniel@serbanescu.dk>\n"
+"Language-Team: Gnome Romanian Translation Team\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2);;\n"
+"X-Generator: Virtaal 0.7.0\n"
+"X-Project-Style: gnome\n"
+
+#: ../data/main.ui.h:1
+msgid "Convert Audio File"
+msgstr "Convertește fișierul audio"
+
+#: ../data/main.ui.h:2
+msgid "Select A Folder"
+msgstr "Alege un dosar"
+
+#: ../data/main.ui.h:3
+msgid "<b>Destination</b>"
+msgstr "<b>Destinație</b>"
+
+#: ../data/main.ui.h:4
+msgid "<b>Format</b>"
+msgstr "<b>Format</b>"
+
+#: ../data/progress.ui.h:1
+msgid "Converting Progress"
+msgstr "Progresul conversiei"
+
+#: ../data/nautilus-sound-converter.schemas.in.h:1
+msgid "Use source directory as output directory"
+msgstr "Utilizați directorul sursă ca director de ieșire"
+
+#: ../data/nautilus-sound-converter.schemas.in.h:2
+msgid "Use the source directory as the default output directory."
+msgstr "Utilizați directorul sursă ca directorul de ieșire implicit."
+
+#: ../src/nsc-converter.c:340
+#, c-format
+msgid "Converting: %d of %d"
+msgstr "Se convertesc: %d din %d"
+
+#: ../src/nsc-converter.c:366
+#, c-format
+msgid ""
+"Nautilus Sound Converter could not convert this file.\n"
+"Reason: %s"
+msgstr ""
+"Nautilus Sound Converter nu a putut converti acest fișier.\n"
+"Motivul: %s"
+
+#: ../src/nsc-converter.c:404 ../src/nsc-converter.c:620
+msgid "Speed: Unknown"
+msgstr "Viteză: Necunoscută"
+
+#: ../src/nsc-converter.c:458
+#, c-format
+msgid "Estimated time left: %d:%02d (at %0.1f×)"
+msgstr "Timp estimat rămas: %d:%02d (la %0.1f×)"
+
+#: ../src/nsc-converter.c:463
+msgid "Estimated time left: unknown"
+msgstr "Timp estimat rămas: necunoscut"
+
+#. Create edit profile button
+#: ../src/nsc-converter.c:698
+msgid "Edit _Profiles..."
+msgstr "Editează _profile..."
+
+#. Should probably do more than just give a warning
+#: ../src/nsc-converter.c:745
+msgid "Could not create GConf client.\n"
+msgstr "Nu s-a putut crea clientul GConf.\n"
+
+#: ../src/nsc-extension.c:170
+msgid "_Convert..."
+msgstr "_Convertește..."
+
+#: ../src/nsc-extension.c:172
+msgid "Convert each selected audio file"
+msgstr "Convertește fiecare fișier audio selectat"
+
+#: ../src/nsc-gstreamer.c:194
+msgid "Audio Profile"
+msgstr "Profil audio"
+
+#: ../src/nsc-gstreamer.c:195
+msgid "The GNOME Audio Profile used for encoding audio"
+msgstr "Profilul audio GNOME folosit pentru codarea audio"
+
+#: ../src/nsc-gstreamer.c:374 ../src/nsc-gstreamer.c:383
+#, c-format
+msgid "Could not create GStreamer file input"
+msgstr "Nu s-a putut crea fișierul de intrare GStreamer"
+
+#: ../src/nsc-gstreamer.c:392
+#, c-format
+msgid "Could not create GStreamer encoders for %s"
+msgstr "Nu s-au putut crea codori GStreamer pentru %s"
+
+#: ../src/nsc-gstreamer.c:407
+#, c-format
+msgid "Could not create GStreamer file output"
+msgstr "Nu s-a putut crea fișierul de ieșire GStreamer"
+
+#: ../src/nsc-gstreamer.c:421 ../src/nsc-gstreamer.c:429
+#, c-format
+msgid "Could not link pipeline"
+msgstr "Nu s-a putut lega linia de asamblare"
+
+#: ../src/nsc-gstreamer.c:464
+msgid "Could not get current file position"
+msgstr "Nu s-a putut obține poziția curentă a fișierului"
+
+#: ../src/nsc-gstreamer.c:565
+msgid "Could not get current file duration"
+msgstr "Nu s-a putut obține durata curentă a fișierului"
+
+#: ../src/nsc-gstreamer.c:633
+#, c-format
+msgid "The plugin necessary for mp3 file access was not found"
+msgstr "Modulul necesar pentru a accesa fișiere mp3 nu a fost găsit"
+
+#: ../src/nsc-gstreamer.c:650
+#, c-format
+msgid "The plugin necessary for wav file access was not found"
+msgstr "Modulul necesar pentru a accesa fișiere wav nu a fost găsit"
+
+#: ../src/nsc-gstreamer.c:668
+#, c-format
+msgid "The plugin necessary for aac file access was not found"
+msgstr "Modulul necesar pentru a accesa fișiere aac nu a fost găsit"
+
+#: ../src/nsc-gstreamer.c:685
+#, c-format
+msgid "The plugin necessary for musepack file access was not found"
+msgstr "Modulul necesar pentru a accesa fișiere musepack nu a fost găsit"
+
+#: ../src/nsc-gstreamer.c:702
+#, c-format
+msgid "The plugin necessary for wma file access was not found"
+msgstr "Modulul necesar pentru a accesa fișiere wma nu a fost găsit"
