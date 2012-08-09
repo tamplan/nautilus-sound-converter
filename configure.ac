@@ -34,7 +34,6 @@ NAUTILUS_REQUIRED=2.12.0
 GCONF_REQUIRED=1.2.0
 GTK_REQUIRED=2.90.3
 GSTREAMER_REQUIRED=0.11.92
-GNOME_MEDIA_PROFILES_REQUIRED=2.11.91
 
 dnl -----------------------------------------------------------
 dnl Check for required libraries
@@ -46,7 +45,8 @@ PKG_CHECK_MODULES(NSC,
 	libnautilus-extension >= $NAUTILUS_REQUIRED
 	gtk+-3.0 >= $GTK_REQUIRED
 	gstreamer-1.0 >= $GSTREAMER_REQUIRED
-	libgnome-media-profiles-3.0 >= $GNOME_MEDIA_PROFILES_REQUIRED
+	gstreamer-pbutils-1.0
+	gstreamer-plugins-base-1.0
 ])
 AC_SUBST(NSC_CFLAGS)
 AC_SUBST(NSC_LIBS)
