@@ -2,7 +2,7 @@
 /*
  *  nsc-converter.c
  * 
- *  Copyright (C) 2008-2011 Brian Pepple
+ *  Copyright (C) 2008-2012 Brian Pepple
  *  Copyright (C) 2003 Ross Burton
  *
  *  This library is free software; you can redistribute it and/or
@@ -38,11 +38,11 @@
 #include <gtk/gtk.h>
 #include <gst/gst.h>
 #include <libnautilus-extension/nautilus-file-info.h>
-#include <libgnome-media-profiles/gnome-media-profiles.h>
 
 #include "nsc-converter.h"
 #include "nsc-gstreamer.h"
 #include "nsc-xml.h"
+#include "rb-gst-media-types.h"
 
 typedef struct _NscConverterPrivate NscConverterPrivate;
 
@@ -58,7 +58,7 @@ struct _NscConverterPrivate {
 	NscGStreamer	*gst;
 
 	/* The current audio profile */
-	GMAudioProfile *profile;
+	GstEncodingProfile *profile;
 
 	GtkWidget	*dialog;
 	GtkWidget	*path_chooser;
@@ -92,7 +92,7 @@ struct _NscConverterPrivate {
 };
 
 /* Default profile name */
-#define DEFAULT_AUDIO_PROFILE_NAME "cdlossy"
+#define DEFAULT_MEDIA_TYPE "audio/x-vorbis"
 
 /*
  * gconf key for whether the user wants to use
@@ -260,6 +260,7 @@ create_new_file (NscConverter *converter, GFile *file)
 {
 	NscConverterPrivate *priv;
 	GFile               *new_file;
+	gchar               *media_type;
 	gchar               *old_basename, *new_basename;
 	gchar               *extension, *new_uri;
 	const gchar         *new_extension;
@@ -278,7 +279,9 @@ create_new_file (NscConverter *converter, GFile *file)
 	g_free (extension);
 
 	/* Get the new extension from the audio profie */
-	new_extension = gm_audio_profile_get_extension (priv->profile);
+	media_type = rb_gst_encoding_profile_get_media_type (priv->profile);
+	new_extension = rb_gst_media_type_to_extension (media_type);
+	g_free (media_type);
 
 	/* Create the new basename */
 	new_basename = g_strdup_printf ("%s.%s", old_basename, new_extension);
@@ -589,6 +592,9 @@ converter_response_cb (GtkWidget *dialog,
 		NscConverter	    *converter;
 		NscConverterPrivate *priv;
 
+		GtkTreeIter iter;
+		GtkTreeModel *model;
+
 		converter = NSC_CONVERTER (user_data);
 		priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
@@ -596,9 +602,18 @@ converter_response_cb (GtkWidget *dialog,
 		priv->save_path =
 			g_strdup (gtk_file_chooser_get_uri
 				  (GTK_FILE_CHOOSER (priv->path_chooser)));
-		
-		priv->profile =
-			gm_audio_profile_choose_get_active (priv->profile_chooser);
+	       
+		/* Grab the encoding profile choosen */
+		model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->profile_chooser));
+		if (gtk_combo_box_get_active_iter
+		    (GTK_COMBO_BOX (priv->profile_chooser), &iter)) {
+			gchar *media_type;
+
+			gtk_tree_model_get (GTK_TREE_MODEL (model), &iter,
+					    0, &media_type, -1);
+			priv->profile = rb_gst_get_encoding_profile (media_type);
+			g_free (media_type);
+		}
 	      
 		/* This probably isn't necessary, but let's leave it for now */
 		if (!(nsc_gstreamer_supports_profile (priv->profile))) {
@@ -627,28 +642,70 @@ converter_response_cb (GtkWidget *dialog,
 	gtk_widget_destroy (dialog);
 }
 
-/**
- * The Edit Profiles button was pressed.
- */
-static void
-converter_edit_profile (GtkButton *button,
-			gpointer   user_data)
+static GtkWidget
+*nsc_audio_profile_chooser_new (void)
 {
-	NscConverterPrivate *priv;
-	GConfClient         *gconf;
-	GtkWidget           *dialog;
+	GstEncodingTarget *target;
+	const GList       *p;
+	GtkWidget         *combo_box;
+	GtkCellRenderer   *renderer;
+	GtkTreeModel      *model;
 
-	priv = NSC_CONVERTER_GET_PRIVATE (user_data);
+	model = GTK_TREE_MODEL (gtk_tree_store_new
+				(3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER));
+	target = rb_gst_get_default_encoding_target ();
 
-	gconf = gconf_client_get_default ();
+	for (p = gst_encoding_target_get_profiles (target); p != NULL; p = p->next) {
+		GstEncodingProfile *profile;
+		gchar *media_type;
 
-	dialog = gm_audio_profiles_edit_new (gconf,
-					     GTK_WINDOW (priv->dialog));
+		profile = GST_ENCODING_PROFILE (p->data);
+		media_type = rb_gst_encoding_profile_get_media_type (profile);
+		if (media_type == NULL) {
+			continue;
+		}
+		gtk_tree_store_insert_with_values (GTK_TREE_STORE (model),
+						   NULL, NULL, -1,
+						   0, media_type,
+						   1, gst_encoding_profile_get_description (profile),
+						   2, profile, -1);
+		g_free (media_type);
+	}
 
-	g_object_unref (gconf);
+	combo_box = gtk_combo_box_new_with_model (model);
+	renderer = gtk_cell_renderer_text_new ();
+	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), renderer, TRUE);
+	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box),
+					renderer, "text", 1, NULL);
 
-	gtk_widget_show_all (dialog);
-	gtk_dialog_run (GTK_DIALOG (dialog));
+	return GTK_WIDGET (combo_box);
+}
+
+static void
+nsc_audio_profile_chooser_set_active (GtkWidget *chooser, const char *profile)
+{
+	GtkTreeIter   iter;
+	GtkTreeModel *model;
+	gboolean      done;
+
+	done = FALSE;
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (chooser));
+	if (gtk_tree_model_get_iter_first (model, &iter)) {
+		do {
+			gchar *media_type;
+
+			gtk_tree_model_get (model, &iter, 0, &media_type, -1);
+			if (g_strcmp0 (media_type, profile) == 0) {
+				gtk_combo_box_set_active_iter (GTK_COMBO_BOX (chooser), &iter);
+				done = TRUE;
+			}
+			g_free (media_type);
+		} while (done == FALSE && gtk_tree_model_iter_next (model, &iter));
+	}
+
+	if (done == FALSE) {
+		gtk_combo_box_set_active_iter (GTK_COMBO_BOX (chooser), NULL);
+	}
 }
 
 static void
@@ -656,8 +713,7 @@ create_main_dialog (NscConverter *converter)
 {
 	NscConverterPrivate *priv;
 	GtkBuilder          *gui;
-	GtkWidget           *hbox, *edit, *image;
-	const gchar         *profile_id;
+	GtkWidget           *hbox;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
@@ -687,34 +743,23 @@ create_main_dialog (NscConverter *converter)
 	}
 
 	/* Create the gstreamer audio profile chooser */
-	priv->profile_chooser = gm_audio_profile_choose_new ();
+	priv->profile_chooser = nsc_audio_profile_chooser_new();
 
 	/* Set which profile is active */
 	if (priv->profile) {
-		profile_id = gm_audio_profile_get_id (priv->profile);
-		gm_audio_profile_choose_set_active (priv->profile_chooser,
-						    profile_id);
+		gchar *media_type;
+		media_type = rb_gst_encoding_profile_get_media_type (priv->profile);
+		nsc_audio_profile_chooser_set_active (priv->profile_chooser, media_type);
+		g_free (media_type);
 	}
 
-	/* Create edit profile button */
-	edit = gtk_button_new_with_mnemonic (dgettext (GETTEXT_PACKAGE, "Edit _Profiles..."));
-	image = gtk_image_new_from_stock ("gtk-edit", GTK_ICON_SIZE_BUTTON);
-	g_object_set (edit,
-		      "gtk-button-images", TRUE,
-		      NULL);
-	gtk_button_set_image (GTK_BUTTON (edit), image);
-
-	/* Let's pack the audio profile chooseer */
+	/* Let's pack the audio profile chooser */
 	gtk_box_pack_start (GTK_BOX (hbox), priv->profile_chooser,
 			    FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), edit, FALSE, FALSE, 0);
 
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (priv->dialog), "response",
 			  (GCallback) converter_response_cb,
-			  converter);
-	g_signal_connect (G_OBJECT (edit), "clicked",
-			  (GCallback) converter_edit_profile,
 			  converter);
 
 	gtk_widget_show_all (priv->dialog);
@@ -756,14 +801,11 @@ nsc_converter_init (NscConverter *self)
 			g_error_free (error);
 		}
 
-		/* Init gnome-media-profiles */
-		gnome_media_profiles_init (gconf);
-
 		/* Unreference the gconf client */
 		g_object_unref (gconf);
 
 		/* Set the profile to the default. */
-		priv->profile = gm_audio_profile_lookup (DEFAULT_AUDIO_PROFILE_NAME);
+		priv->profile = rb_gst_get_encoding_profile (DEFAULT_MEDIA_TYPE);
 	}
 }
 
