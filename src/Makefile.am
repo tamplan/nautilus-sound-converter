@@ -16,7 +16,8 @@ libnautilus_sound_converter_la_SOURCES =		\
 	nsc-extension.c		nsc-extension.h		\
 	nsc-converter.c		nsc-converter.h		\
 	nsc-gstreamer.c		nsc-gstreamer.h		\
-	nsc-xml.c		nsc-xml.h
+	nsc-xml.c		nsc-xml.h		\
+	rb-gst-media-types.c	rb-gst-media-types.h
 
 libnautilus_sound_converter_la_LDFLAGS = -module -avoid-version
 libnautilus_sound_converter_la_LIBADD  = $(NSC_LIBS)

@@ -7,7 +7,10 @@ builderdir = $(datadir)/nautilus-sound-converter
 builder_DATA =		\
 	main.ui		\
 	progress.ui
-	
+
+profilesdir = $(datadir)/nautilus-sound-converter
+dist_profiles_DATA = rhythmbox.gep
+
 EXTRA_DIST =			\
 	$(builder_DATA)		\
 	$(schemas_in_files)
