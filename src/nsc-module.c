@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  *  nsc-module.c
  * 
@@ -35,7 +35,7 @@ static GType type_list[1];
 void nautilus_module_initialize (GTypeModule  *module);
 void nautilus_module_shutdown   (void);
 void nautilus_module_list_types (const GType **types,
-				 int          *num_types);
+								 int          *num_types);
 
 void
 nautilus_module_initialize (GTypeModule *module)
@@ -57,7 +57,7 @@ nautilus_module_shutdown (void)
 
 void 
 nautilus_module_list_types (const GType **types,
-			    int          *num_types)
+							int          *num_types)
 {
 	*types = type_list;
 	*num_types = G_N_ELEMENTS (type_list);

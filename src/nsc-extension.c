@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  *  nsc-extension.c
  * 
@@ -43,8 +43,8 @@
 static void   nsc_extension_instance_init  (NscExtension         *sound);
 static void   nsc_extension_class_init     (NscExtensionClass    *class);
 static GList *nsc_extension_get_file_items (NautilusMenuProvider *provider,
-					    GtkWidget            *window,
-					    GList                *files);
+											GtkWidget            *window,
+											GList                *files);
 
 static GType sound_converter_type = 0;
 
@@ -137,7 +137,7 @@ converter_filter_files (GList *files)
 
 static void
 sound_convert_callback (NautilusMenuItem *item,
-		        GList            *files)
+						GList            *files)
 {
 	NscConverter *converter;
 
@@ -148,16 +148,16 @@ sound_convert_callback (NautilusMenuItem *item,
 
 static GList *
 nsc_extension_get_background_items (NautilusMenuProvider  *provider,
-				    GtkWidget             *window,
-				    NautilusFileInfo      *file_info)
+									GtkWidget             *window,
+									NautilusFileInfo      *file_info)
 {
 	return NULL;
 }
 
 static GList *
 nsc_extension_get_file_items (NautilusMenuProvider *provider,
-			      GtkWidget            *window,
-			      GList                *files)
+							  GtkWidget            *window,
+							  GList                *files)
 {
 	NautilusMenuItem *item;
 	GList            *scan = NULL;
@@ -168,15 +168,16 @@ nsc_extension_get_file_items (NautilusMenuProvider *provider,
 
 	for (scan = files; scan; scan = scan->next) {
 		if (file_is_sound (scan->data)) {
-			item = nautilus_menu_item_new ("NautilusSoundConverter::convert",
-                                                       dgettext (GETTEXT_PACKAGE, "_Convert..."),
-                                                       dgettext (GETTEXT_PACKAGE,
-								 "Convert each selected audio file"),
-                                                       "audio-x-generic");
+			item =
+				nautilus_menu_item_new ("NautilusSoundConverter::convert",
+										dgettext (GETTEXT_PACKAGE, "_Convert..."),
+										dgettext (GETTEXT_PACKAGE,
+												  "Convert each selected audio file"),
+										"audio-x-generic");
 
 			g_signal_connect (item, "activate",
-					  G_CALLBACK (sound_convert_callback),
-					  nautilus_file_info_list_copy (files));
+							  G_CALLBACK (sound_convert_callback),
+							  nautilus_file_info_list_copy (files));
 
 			items = g_list_prepend (items, item);
 			items = g_list_reverse (items);
@@ -237,13 +238,14 @@ nsc_extension_register_type (GTypeModule *module)
 		NULL,
 	};
 
-	sound_converter_type = g_type_module_register_type (module,
-							   G_TYPE_OBJECT,
-							   "NscExtension",
-							   &info, 0);
+	sound_converter_type =
+		g_type_module_register_type (module,
+									 G_TYPE_OBJECT,
+									 "NscExtension",
+									 &info, 0);
 
 	g_type_module_add_interface (module,
-				     sound_converter_type,
-				     NAUTILUS_TYPE_MENU_PROVIDER,
-				     &menu_provider_iface_info);
+								 sound_converter_type,
+								 NAUTILUS_TYPE_MENU_PROVIDER,
+								 &menu_provider_iface_info);
 }

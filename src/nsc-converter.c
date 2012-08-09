@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  *  nsc-converter.c
  * 
@@ -60,8 +60,8 @@ struct _NscConverterPrivate {
 	/* The current audio profile */
 	GstEncodingProfile *profile;
 
-	GtkWidget	*dialog;
-	GtkWidget	*path_chooser;
+	GtkWidget       *dialog;
+	GtkWidget       *path_chooser;
 	GtkWidget       *profile_chooser;
 	GtkWidget       *progress_dlg;
 	GtkWidget       *progressbar;
@@ -71,9 +71,9 @@ struct _NscConverterPrivate {
 	GtkStatusIcon   *status_icon;
 	
 	/* Files to be convertered */
-	GList		*files;
+	GList           *files;
 	gint             files_converted;
-	gint		 total_files;
+	gint             total_files;
 
 	/* Use the source directory as the output directory? */
 	gboolean         src_dir;
@@ -138,9 +138,9 @@ nsc_converter_finalize (GObject *object)
 
 static void
 nsc_converter_set_property (GObject      *object,
-			    guint         property_id,
-			    const GValue *value,
-			    GParamSpec   *pspec)
+							guint         property_id,
+							const GValue *value,
+							GParamSpec   *pspec)
 {
 	NscConverter        *self = NSC_CONVERTER (object);
 	NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (self);
@@ -159,9 +159,9 @@ nsc_converter_set_property (GObject      *object,
 
 static void
 nsc_converter_get_property (GObject    *object,
-			    guint       property_id,
-			    GValue     *value,
-			    GParamSpec *pspec)
+							guint       property_id,
+							GValue     *value,
+							GParamSpec *pspec)
 {
 	NscConverter	    *self = NSC_CONVERTER (object);
 	NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (self);
@@ -191,13 +191,13 @@ nsc_converter_class_init (NscConverterClass *klass)
 
 	files_param_spec =
 		g_param_spec_pointer ("files",
-				      "Files",
-				      "Set selected files",
-				      G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE);
+							  "Files",
+							  "Set selected files",
+							  G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE);
 
 	g_object_class_install_property (object_class,
-					 PROP_FILES,
-					 files_param_spec);
+									 PROP_FILES,
+									 files_param_spec);
 }
 
 /**
@@ -236,18 +236,18 @@ create_progress_dialog (NscConverter *converter)
 
 	/* Create the gtkbuilder, and grab the widgets */
 	gui = nsc_builder_get_file ("progress.ui",
-				    "progress_dialog", &priv->progress_dlg,
-				    "file_progressbar", &priv->progressbar,
-				    "speed_progressbar", &priv->speedbar,
-				    "cancel_button", &button,
-				    NULL);
+								"progress_dialog", &priv->progress_dlg,
+								"file_progressbar", &priv->progressbar,
+								"speed_progressbar", &priv->speedbar,
+								"cancel_button", &button,
+								NULL);
 
 	g_object_unref (gui);
 
         /* Connect the signal for the cancel button */
 	g_signal_connect (G_OBJECT (button), "clicked",
-			  (GCallback) progress_cancel_cb,
-			  converter);
+					  (GCallback) progress_cancel_cb,
+					  converter);
 
 	gtk_widget_show_all (priv->progress_dlg);
 }
@@ -289,7 +289,7 @@ create_new_file (NscConverter *converter, GFile *file)
 
 	/* Now let's create the new files uri */
 	new_uri = g_strconcat (priv->save_path, G_DIR_SEPARATOR_S,
-			       new_basename, NULL);
+						   new_basename, NULL);
 	g_free (new_basename);
 
 	/* And now finally let's create the new GFile */
@@ -322,7 +322,7 @@ convert_file (NscConverter *convert)
 
 	/* Let's finally get to the fun stuff */
 	nsc_gstreamer_convert_file (priv->gst, old_file, new_file,
-				    &err);
+								&err);
 
 	/* Free the files since we do not need them anymore */
 	g_object_unref (old_file);
@@ -343,12 +343,11 @@ update_progressbar_text (NscConverter *convert)
 	priv = NSC_CONVERTER_GET_PRIVATE (convert);
 
 	text = g_strdup_printf (dgettext (GETTEXT_PACKAGE, "Converting: %d of %d"),
-				priv->files_converted + 1, priv->total_files);
+							priv->files_converted + 1, priv->total_files);
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->progressbar),
-				   text);
+							   text);
 	if (priv->status_icon) {
-		gtk_status_icon_set_tooltip_text (priv->status_icon,
-						  text);
+		gtk_status_icon_set_tooltip_text (priv->status_icon, text);
 	}
 	g_free (text);
 }
@@ -369,13 +368,13 @@ on_error_cb (NscGStreamer *gstream, GError *error, gpointer data)
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 	text = g_strdup_printf (dgettext (GETTEXT_PACKAGE, "Nautilus Sound Converter could "
-					  "not convert this file.\nReason: %s"),
-				error->message);
+									  "not convert this file.\nReason: %s"),
+							error->message);
 
 	dialog = gtk_message_dialog_new (GTK_WINDOW (priv->dialog), 0,
-					 GTK_MESSAGE_ERROR,
-					 GTK_BUTTONS_CLOSE,
-					 text);
+									 GTK_MESSAGE_ERROR,
+									 GTK_BUTTONS_CLOSE,
+									 text);
 	g_free (text);
 
 	gtk_dialog_run (GTK_DIALOG (dialog));
@@ -406,12 +405,12 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
 
 	/* Clear the speed label */
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar),
-				   (dgettext (GETTEXT_PACKAGE, "Speed: Unknown")));
+							   (dgettext (GETTEXT_PACKAGE, "Speed: Unknown")));
 
 	/* Update the progress dialog */
 	fraction = (double) priv->files_converted / priv->total_files;
 	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (priv->progressbar),
-				       fraction);
+								   fraction);
 	update_progressbar_text (converter);
 
 	/* If there are more files let's go ahead and convert them */
@@ -432,8 +431,8 @@ on_completion_cb (NscGStreamer *gstream, gpointer data)
  */
 static void
 on_duration_cb (NscGStreamer *gstream,
-		const int     seconds,
-		gpointer      data)
+				const int     seconds,
+				gpointer      data)
 {
 	NscConverter        *conv;
 	NscConverterPrivate *priv;
@@ -449,8 +448,8 @@ on_duration_cb (NscGStreamer *gstream,
  */
 static void
 update_speed_progress (NscConverter *conv,
-		       float         speed,
-		       int           eta)
+					   float         speed,
+					   int           eta)
 {
 	NscConverterPrivate *priv;
 	gchar               *eta_str;
@@ -460,16 +459,16 @@ update_speed_progress (NscConverter *conv,
 	if (eta >= 0) {
 		eta_str =
 			g_strdup_printf (dgettext (GETTEXT_PACKAGE, 
-						   "Estimated time left: %d:%02d (at %0.1f\303\227)"),
-					 eta / 60,
-					 eta % 60,
-					 speed);
+									   "Estimated time left: %d:%02d (at %0.1f\303\227)"),
+							 eta / 60,
+							 eta % 60,
+							 speed);
 	} else {
 		eta_str = g_strdup (dgettext (GETTEXT_PACKAGE, "Estimated time left: unknown"));
 	}
 
 	gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar),
-				   eta_str);
+							   eta_str);
 	g_free (eta_str);
 }
 
@@ -478,8 +477,8 @@ update_speed_progress (NscConverter *conv,
  */
 static void
 on_progress_cb (NscGStreamer *gstream,
-		const int     seconds,
-		gpointer      data)
+				const int     seconds,
+				gpointer      data)
 {
 	NscConverter        *conv;
 	NscConverterPrivate *priv;
@@ -512,8 +511,8 @@ on_progress_cb (NscGStreamer *gstream,
 				priv->before.ripped += priv->current_duration + seconds - priv->before.seconds;
 				speed = (float) priv->before.ripped / (float) priv->before.taken;
 				update_speed_progress (conv, speed,
-						       (int) ((priv->total_duration - priv->current_duration - seconds)
-							      / speed));
+									   (int) ((priv->total_duration - priv->current_duration - seconds)
+											  / speed));
 				priv->before.seconds = priv->current_duration + seconds;
 				gettimeofday (&priv->before.time, NULL);
 			}
@@ -523,7 +522,7 @@ on_progress_cb (NscGStreamer *gstream,
 
 static void
 converter_status_icon_activate_cb (GtkStatusIcon *status_icon,
-				   NscConverter  *converter)
+								   NscConverter  *converter)
 {
 	NscConverterPrivate *priv;
 	gboolean             visible;
@@ -531,8 +530,8 @@ converter_status_icon_activate_cb (GtkStatusIcon *status_icon,
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
 	g_object_get (priv->progress_dlg,
-		      "visible", &visible,
-		      NULL);
+				  "visible", &visible,
+				  NULL);
 
 	if (visible && gtk_status_icon_is_embedded (status_icon)) {
 		gtk_widget_hide (priv->progress_dlg);
@@ -552,17 +551,17 @@ create_gst (NscConverter *conv)
 	
 	/* Connect to the gstreamer object signals */
 	g_signal_connect (G_OBJECT (priv->gst), "completion",
-			  (GCallback) on_completion_cb,
-			  conv);
+					  (GCallback) on_completion_cb,
+					  conv);
 	g_signal_connect (G_OBJECT (priv->gst), "error",
-			  (GCallback) on_error_cb,
-			  conv);
+					  (GCallback) on_error_cb,
+					  conv);
 	g_signal_connect (G_OBJECT (priv->gst), "progress",
-			  (GCallback) on_progress_cb,
-			  conv);
+					  (GCallback) on_progress_cb,
+					  conv);
 	g_signal_connect (G_OBJECT (priv->gst), "duration",
-			  (GCallback) on_duration_cb,
-			  conv);
+					  (GCallback) on_duration_cb,
+					  conv);
 }
 
 static void
@@ -574,9 +573,9 @@ create_status_icon (NscConverter *conv)
 
 	priv->status_icon = gtk_status_icon_new_from_icon_name ("gtk-convert");
 	g_signal_connect (priv->status_icon,
-			  "activate",
-			  G_CALLBACK (converter_status_icon_activate_cb),
-			  conv);
+					  "activate",
+					  G_CALLBACK (converter_status_icon_activate_cb),
+					  conv);
 	gtk_status_icon_set_visible (priv->status_icon, TRUE);
 }
 	
@@ -585,8 +584,8 @@ create_status_icon (NscConverter *conv)
  */
 static void
 converter_response_cb (GtkWidget *dialog,
-		       gint       response_id,
-		       gpointer   user_data)
+					   gint       response_id,
+					   gpointer   user_data)
 {
 	if (response_id == GTK_RESPONSE_OK) {
 		NscConverter	    *converter;
@@ -601,7 +600,7 @@ converter_response_cb (GtkWidget *dialog,
 		/* Grab the save path */
 		priv->save_path =
 			g_strdup (gtk_file_chooser_get_uri
-				  (GTK_FILE_CHOOSER (priv->path_chooser)));
+					  (GTK_FILE_CHOOSER (priv->path_chooser)));
 	       
 		/* Grab the encoding profile choosen */
 		model = gtk_combo_box_get_model (GTK_COMBO_BOX (priv->profile_chooser));
@@ -610,7 +609,7 @@ converter_response_cb (GtkWidget *dialog,
 			gchar *media_type;
 
 			gtk_tree_model_get (GTK_TREE_MODEL (model), &iter,
-					    0, &media_type, -1);
+								0, &media_type, -1);
 			priv->profile = rb_gst_get_encoding_profile (media_type);
 			g_free (media_type);
 		}
@@ -634,7 +633,7 @@ converter_response_cb (GtkWidget *dialog,
 		/* Let's put some text in the progressbar */
 		update_progressbar_text (converter);
 		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (priv->speedbar), 
-					   (dgettext (GETTEXT_PACKAGE, "Speed: Unknown")));
+								   (dgettext (GETTEXT_PACKAGE, "Speed: Unknown")));
 
 		/* Alright we're finally ready to start converting */
 		convert_file (converter);
@@ -652,7 +651,7 @@ static GtkWidget
 	GtkTreeModel      *model;
 
 	model = GTK_TREE_MODEL (gtk_tree_store_new
-				(3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER));
+							(3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER));
 	target = rb_gst_get_default_encoding_target ();
 
 	for (p = gst_encoding_target_get_profiles (target); p != NULL; p = p->next) {
@@ -665,10 +664,10 @@ static GtkWidget
 			continue;
 		}
 		gtk_tree_store_insert_with_values (GTK_TREE_STORE (model),
-						   NULL, NULL, -1,
-						   0, media_type,
-						   1, gst_encoding_profile_get_description (profile),
-						   2, profile, -1);
+										   NULL, NULL, -1,
+										   0, media_type,
+										   1, gst_encoding_profile_get_description (profile),
+										   2, profile, -1),
 		g_free (media_type);
 	}
 
@@ -676,7 +675,7 @@ static GtkWidget
 	renderer = gtk_cell_renderer_text_new ();
 	gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), renderer, TRUE);
 	gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box),
-					renderer, "text", 1, NULL);
+									renderer, "text", 1, NULL);
 
 	return GTK_WIDGET (combo_box);
 }
@@ -719,10 +718,10 @@ create_main_dialog (NscConverter *converter)
 
 	/* Create the gtkbuilder and grab some widgets */
 	gui = nsc_builder_get_file ("main.ui",
-				    "main_dialog", &priv->dialog,
-				    "path_chooser", &priv->path_chooser,
-				    "format_hbox", &hbox,
-				    NULL);
+								"main_dialog", &priv->dialog,
+								"path_chooser", &priv->path_chooser,
+								"format_hbox", &hbox,
+								NULL);
 
 	g_object_unref (gui);
 
@@ -738,7 +737,7 @@ create_main_dialog (NscConverter *converter)
 		uri = nautilus_file_info_get_uri (file_info);
 
 		gtk_file_chooser_set_uri (GTK_FILE_CHOOSER (priv->path_chooser),
-					  uri);
+								  uri);
 		g_free (uri);
 	}
 
@@ -755,12 +754,12 @@ create_main_dialog (NscConverter *converter)
 
 	/* Let's pack the audio profile chooser */
 	gtk_box_pack_start (GTK_BOX (hbox), priv->profile_chooser,
-			    FALSE, FALSE, 0);
+						FALSE, FALSE, 0);
 
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (priv->dialog), "response",
-			  (GCallback) converter_response_cb,
-			  converter);
+					  (GCallback) converter_response_cb,
+					  converter);
 
 	gtk_widget_show_all (priv->dialog);
 }
@@ -793,8 +792,8 @@ nsc_converter_init (NscConverter *self)
 		}
 
 		priv->src_dir = gconf_client_get_bool (gconf,
-						       SOURCE_DIRECTORY,
-						       &error);
+											   SOURCE_DIRECTORY,
+											   &error);
 
 		if (error) {
 			priv->src_dir = FALSE;

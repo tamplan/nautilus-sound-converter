@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
 /*
  * Copyright (C) 2002-2007 Imendio AB
  * Copyright (C) 2008 Brian Pepple
@@ -69,7 +69,7 @@ xml_get_file (const gchar *filename,
 		
 		if (!*object_ptr) {
 			g_warning ("Widget '%s' at '%s' is missing.",
-				   name, filename);
+					   name, filename);
 			continue;
 		}
 	}
@@ -78,8 +78,8 @@ xml_get_file (const gchar *filename,
 
 GtkBuilder *
 nsc_builder_get_file (const gchar *filename,
-		      const gchar *first_object,
-		      ...)
+					  const gchar *first_object,
+					  ...)
 {
 	GtkBuilder *gui;
 	va_list     args;
