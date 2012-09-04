@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-sound-converter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-09-04 19:50+0200\n"
-"PO-Revision-Date: 2012-09-04 19:51+0200\n"
+"POT-Creation-Date: 2012-09-04 23:27+0200\n"
+"PO-Revision-Date: 2012-09-04 23:28+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -32,12 +32,12 @@ msgid "Select A Folder"
 msgstr "Wybór katalogu"
 
 #: ../data/main.ui.h:3
-msgid "<b>Destination</b>"
-msgstr "<b>Miejsce docelowe</b>"
+msgid "Destination"
+msgstr "Miejsce docelowe"
 
 #: ../data/main.ui.h:4
-msgid "<b>Format</b>"
-msgstr "<b>Format</b>"
+msgid "Format"
+msgstr "Format"
 
 #: ../data/progress.ui.h:1
 msgid "Converting Progress"
