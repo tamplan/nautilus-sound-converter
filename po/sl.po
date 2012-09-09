@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the nautilus-sound-converter package.
 #
 # Tomaž Gorenc <tomzigorenc@gmail.com>, 2011.
+# Martin Srebotnjak  <miles@filmsi.net>, 2012.
 #
 msgid ""
 msgstr ""
@@ -12,6 +13,7 @@ msgstr ""
 "PO-Revision-Date: 2011-01-03 19:29+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
+"Language: Slovenian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,20 +23,22 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../data/main.ui.h:1
-msgid "<b>Destination</b>"
-msgstr "<b>Cilj</b>"
-
-#: ../data/main.ui.h:2
-msgid "<b>Format</b>"
-msgstr "<b>Zapis</b>"
-
-#: ../data/main.ui.h:3
 msgid "Convert Audio File"
 msgstr "Pretvori zvočno datoteko"
 
-#: ../data/main.ui.h:4
+#: ../data/main.ui.h:2
 msgid "Select A Folder"
 msgstr "Izbor mape"
+
+#: ../data/main.ui.h:3
+#| msgid "<b>Destination</b>"
+msgid "Destination"
+msgstr "Cilj"
+
+#: ../data/main.ui.h:4
+#| msgid "<b>Format</b>"
+msgid "Format"
+msgstr "Zapis"
 
 #: ../data/progress.ui.h:1
 msgid "Converting Progress"
@@ -48,12 +52,12 @@ msgstr "Uporabi izvorno mapo kot izhodno mapo"
 msgid "Use the source directory as the default output directory."
 msgstr "Uporabi izvorno mapo kot privzeto izhodno mapo."
 
-#: ../src/nsc-converter.c:338
+#: ../src/nsc-converter.c:340
 #, c-format
 msgid "Converting: %d of %d"
 msgstr "Pretvarjanje: %d od %d"
 
-#: ../src/nsc-converter.c:364
+#: ../src/nsc-converter.c:366
 #, c-format
 msgid ""
 "Nautilus Sound Converter could not convert this file.\n"
@@ -62,97 +66,97 @@ msgstr ""
 "S programom za pretvarjanje zvoka te datoteke ni mogoče pretvoriti.\n"
 "Vzrok: %s"
 
-#: ../src/nsc-converter.c:402
-#: ../src/nsc-converter.c:618
+#: ../src/nsc-converter.c:404
+#: ../src/nsc-converter.c:620
 msgid "Speed: Unknown"
 msgstr "Hitrost: neznano"
 
-#: ../src/nsc-converter.c:456
+#: ../src/nsc-converter.c:458
 #, c-format
 msgid "Estimated time left: %d:%02d (at %0.1f×)"
 msgstr "Ocenjen preostali čas: %d:%02d (pri %0.1f×)"
 
-#: ../src/nsc-converter.c:461
+#: ../src/nsc-converter.c:463
 msgid "Estimated time left: unknown"
 msgstr "Ocenjen preostali čas: neznano"
 
 #. Create edit profile button
-#: ../src/nsc-converter.c:694
+#: ../src/nsc-converter.c:698
 msgid "Edit _Profiles..."
 msgstr "Uredi _profile ..."
 
 #. Should probably do more than just give a warning
-#: ../src/nsc-converter.c:741
+#: ../src/nsc-converter.c:745
 msgid "Could not create GConf client.\n"
 msgstr "Odjemalca GConf ni mogoče ustvariti.\n"
 
-#: ../src/nsc-extension.c:166
+#: ../src/nsc-extension.c:170
 msgid "_Convert..."
 msgstr "_Pretvori ..."
 
-#: ../src/nsc-extension.c:168
+#: ../src/nsc-extension.c:172
 msgid "Convert each selected audio file"
 msgstr "Pretvori posamezno izbrano zvočno datoteko "
 
-#: ../src/nsc-gstreamer.c:193
+#: ../src/nsc-gstreamer.c:194
 msgid "Audio Profile"
 msgstr "Zvočni profil"
 
-#: ../src/nsc-gstreamer.c:194
+#: ../src/nsc-gstreamer.c:195
 msgid "The GNOME Audio Profile used for encoding audio"
 msgstr "Zvočni profil GNOME za kodiranje zvoka"
 
-#: ../src/nsc-gstreamer.c:381
-#: ../src/nsc-gstreamer.c:390
+#: ../src/nsc-gstreamer.c:374
+#: ../src/nsc-gstreamer.c:383
 #, c-format
 msgid "Could not create GStreamer file input"
 msgstr "Vhodne datoteke GStreamer ni mogoče ustvariti "
 
-#: ../src/nsc-gstreamer.c:399
+#: ../src/nsc-gstreamer.c:392
 #, c-format
 msgid "Could not create GStreamer encoders for %s"
 msgstr "Kodirnikov GStreamer za %s ni mogoče ustvariti"
 
-#: ../src/nsc-gstreamer.c:414
+#: ../src/nsc-gstreamer.c:407
 #, c-format
 msgid "Could not create GStreamer file output"
 msgstr "Izhodne datoteke GStreamer ni mogoče ustvariti"
 
-#: ../src/nsc-gstreamer.c:436
-#: ../src/nsc-gstreamer.c:444
+#: ../src/nsc-gstreamer.c:421
+#: ../src/nsc-gstreamer.c:429
 #, c-format
 msgid "Could not link pipeline"
 msgstr "Cevovoda ni mogoče povezati"
 
-#: ../src/nsc-gstreamer.c:479
+#: ../src/nsc-gstreamer.c:464
 msgid "Could not get current file position"
 msgstr "Položaja trenutne datoteke ni mogoče dobiti"
 
-#: ../src/nsc-gstreamer.c:580
+#: ../src/nsc-gstreamer.c:565
 msgid "Could not get current file duration"
 msgstr "Trajanja trenutne datoteke ni mogoče dobiti"
 
-#: ../src/nsc-gstreamer.c:648
+#: ../src/nsc-gstreamer.c:633
 #, c-format
 msgid "The plugin necessary for mp3 file access was not found"
 msgstr "Zahtevanega vstavka za dostop do datoteke mp3 ni mogoče najti"
 
-#: ../src/nsc-gstreamer.c:665
+#: ../src/nsc-gstreamer.c:650
 #, c-format
 msgid "The plugin necessary for wav file access was not found"
 msgstr "Zahtevanega vstavka za dostop do datoteke wav ni mogoče najti"
 
-#: ../src/nsc-gstreamer.c:683
+#: ../src/nsc-gstreamer.c:668
 #, c-format
 msgid "The plugin necessary for aac file access was not found"
 msgstr "Zahtevanega vstavka za dostop do datoteke aac ni mogoče najti"
 
-#: ../src/nsc-gstreamer.c:700
+#: ../src/nsc-gstreamer.c:685
 #, c-format
 msgid "The plugin necessary for musepack file access was not found"
 msgstr "Zahtevanega vstavka za dostop do datoteke musepack ni mogoče najti"
 
-#: ../src/nsc-gstreamer.c:717
+#: ../src/nsc-gstreamer.c:702
 #, c-format
 msgid "The plugin necessary for wma file access was not found"
 msgstr "Zahtevanega vstavka za dostop do datoteke wma ni mogoče najti"
