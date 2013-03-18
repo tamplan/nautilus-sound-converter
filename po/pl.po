@@ -4,12 +4,14 @@
 # pomóc w jego rozwijaniu i pielęgnowaniu, napisz do nas:
 # gnomepl@aviary.pl
 # -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2012.
+# Aviary.pl <gnomepl@aviary.pl>, 2011-2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-sound-converter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-11-27 18:00+0100\n"
-"PO-Revision-Date: 2011-11-27 18:01+0100\n"
+"POT-Creation-Date: 2012-09-04 23:27+0200\n"
+"PO-Revision-Date: 2012-09-04 23:28+0200\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
 "Language: pl\n"
@@ -22,20 +24,20 @@ msgstr ""
 "X-Poedit-Country: Poland\n"
 
 #: ../data/main.ui.h:1
-msgid "<b>Destination</b>"
-msgstr "<b>Miejsce docelowe</b>"
-
-#: ../data/main.ui.h:2
-msgid "<b>Format</b>"
-msgstr "<b>Format</b>"
-
-#: ../data/main.ui.h:3
 msgid "Convert Audio File"
 msgstr "Konwersja pliku dźwiękowego"
 
-#: ../data/main.ui.h:4
+#: ../data/main.ui.h:2
 msgid "Select A Folder"
 msgstr "Wybór katalogu"
+
+#: ../data/main.ui.h:3
+msgid "Destination"
+msgstr "Miejsce docelowe"
+
+#: ../data/main.ui.h:4
+msgid "Format"
+msgstr "Format"
 
 #: ../data/progress.ui.h:1
 msgid "Converting Progress"
@@ -49,12 +51,12 @@ msgstr "Użycie katalogu źródłowego jako katalogu wyjściowego"
 msgid "Use the source directory as the default output directory."
 msgstr "Użycie katalogu źródłowego jako domyślnego katalogu wyjściowego."
 
-#: ../src/nsc-converter.c:338
+#: ../src/nsc-converter.c:340
 #, c-format
 msgid "Converting: %d of %d"
 msgstr "Konwertowanie: %d z %d"
 
-#: ../src/nsc-converter.c:364
+#: ../src/nsc-converter.c:366
 #, c-format
 msgid ""
 "Nautilus Sound Converter could not convert this file.\n"
@@ -63,94 +65,94 @@ msgstr ""
 "Program Nautilus Sound Converter nie może przekonwertować tego pliku.\n"
 "Przyczyna: %s"
 
-#: ../src/nsc-converter.c:402 ../src/nsc-converter.c:618
+#: ../src/nsc-converter.c:404 ../src/nsc-converter.c:620
 msgid "Speed: Unknown"
 msgstr "Prędkość: nieznana"
 
-#: ../src/nsc-converter.c:456
+#: ../src/nsc-converter.c:458
 #, c-format
 msgid "Estimated time left: %d:%02d (at %0.1f×)"
 msgstr "Szacowany pozostały czas: %d:%02d (przy prędkości %0.1f×)"
 
-#: ../src/nsc-converter.c:461
+#: ../src/nsc-converter.c:463
 msgid "Estimated time left: unknown"
 msgstr "Szacowany pozostały czas: nieznany"
 
 #. Create edit profile button
-#: ../src/nsc-converter.c:696
+#: ../src/nsc-converter.c:698
 msgid "Edit _Profiles..."
 msgstr "_Modyfikuj profile..."
 
 #. Should probably do more than just give a warning
-#: ../src/nsc-converter.c:743
+#: ../src/nsc-converter.c:745
 msgid "Could not create GConf client.\n"
 msgstr "Nie można utworzyć klienta GConf.\n"
 
-#: ../src/nsc-extension.c:168
+#: ../src/nsc-extension.c:170
 msgid "_Convert..."
 msgstr "Prze_konwertuj..."
 
-#: ../src/nsc-extension.c:170
+#: ../src/nsc-extension.c:172
 msgid "Convert each selected audio file"
 msgstr "Konwertuje każdy zaznaczony plik dźwiękowy"
 
-#: ../src/nsc-gstreamer.c:192
+#: ../src/nsc-gstreamer.c:194
 msgid "Audio Profile"
 msgstr "Profil dźwiękowy"
 
-#: ../src/nsc-gstreamer.c:193
+#: ../src/nsc-gstreamer.c:195
 msgid "The GNOME Audio Profile used for encoding audio"
 msgstr "Profil dźwiękowy środowiska GNOME używany do kodowania dźwięku"
 
-#: ../src/nsc-gstreamer.c:380 ../src/nsc-gstreamer.c:389
+#: ../src/nsc-gstreamer.c:374 ../src/nsc-gstreamer.c:383
 #, c-format
 msgid "Could not create GStreamer file input"
 msgstr "Nie można utworzyć wejściowego pliku biblioteki GStreamer"
 
-#: ../src/nsc-gstreamer.c:398
+#: ../src/nsc-gstreamer.c:392
 #, c-format
 msgid "Could not create GStreamer encoders for %s"
 msgstr "Nie można utworzyć koderów biblioteki GStreamer dla %s"
 
-#: ../src/nsc-gstreamer.c:413
+#: ../src/nsc-gstreamer.c:407
 #, c-format
 msgid "Could not create GStreamer file output"
 msgstr "Nie można utworzyć wyjściowego pliku biblioteki GStreamer"
 
-#: ../src/nsc-gstreamer.c:435 ../src/nsc-gstreamer.c:443
+#: ../src/nsc-gstreamer.c:421 ../src/nsc-gstreamer.c:429
 #, c-format
 msgid "Could not link pipeline"
 msgstr "Nie można dowiązać potoku"
 
-#: ../src/nsc-gstreamer.c:478
+#: ../src/nsc-gstreamer.c:464
 msgid "Could not get current file position"
 msgstr "Nie można uzyskać bieżącego położenia pliku"
 
-#: ../src/nsc-gstreamer.c:579
+#: ../src/nsc-gstreamer.c:565
 msgid "Could not get current file duration"
 msgstr "Nie można uzyskać bieżącego czasu trwania pliku"
 
-#: ../src/nsc-gstreamer.c:647
+#: ../src/nsc-gstreamer.c:633
 #, c-format
 msgid "The plugin necessary for mp3 file access was not found"
 msgstr "Nie odnaleziono wtyczki niezbędnej do dostępu do pliku MP3"
 
-#: ../src/nsc-gstreamer.c:664
+#: ../src/nsc-gstreamer.c:650
 #, c-format
 msgid "The plugin necessary for wav file access was not found"
 msgstr "Nie odnaleziono wtyczki niezbędnej do dostępu do pliku WAV"
 
-#: ../src/nsc-gstreamer.c:682
+#: ../src/nsc-gstreamer.c:668
 #, c-format
 msgid "The plugin necessary for aac file access was not found"
 msgstr "Nie odnaleziono wtyczki niezbędnej do dostępu do pliku AAC"
 
-#: ../src/nsc-gstreamer.c:699
+#: ../src/nsc-gstreamer.c:685
 #, c-format
 msgid "The plugin necessary for musepack file access was not found"
 msgstr "Nie odnaleziono wtyczki niezbędnej do dostępu do pliku Musepack"
 
-#: ../src/nsc-gstreamer.c:716
+#: ../src/nsc-gstreamer.c:702
 #, c-format
 msgid "The plugin necessary for wma file access was not found"
 msgstr "Nie odnaleziono wtyczki niezbędnej do dostępu do pliku WMA"
