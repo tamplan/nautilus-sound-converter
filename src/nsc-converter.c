@@ -33,8 +33,8 @@
 #include <sys/time.h>
 #include <string.h>
 
-#include <gconf/gconf-client.h>
 #include <glib/gi18n.h>
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gst/gst.h>
 #include <libnautilus-extension/nautilus-file-info.h>
@@ -57,6 +57,8 @@ struct _NscConverterPrivate {
 	/* GStreamer Object */
 	NscGStreamer	*gst;
 
+    GSettings       *settings;
+
 	/* The current audio profile */
 	GstEncodingProfile *profile;
 
@@ -75,9 +77,6 @@ struct _NscConverterPrivate {
 	gint             files_converted;
 	gint             total_files;
 
-	/* Use the source directory as the output directory? */
-	gboolean         src_dir;
-
 	/* Directory to save new file */
 	gchar           *save_path;
 
@@ -95,10 +94,9 @@ struct _NscConverterPrivate {
 #define DEFAULT_MEDIA_TYPE "audio/x-vorbis"
 
 /*
- * gconf key for whether the user wants to use
- * the source directory for the output directory.
+ * gsetting file converting source directory
  */
-#define SOURCE_DIRECTORY "/apps/nautilus-sound-converter/source_dir"
+#define SOURCE_DIRECTORY "source-dir"
 
 #define NSC_CONVERTER_GET_PRIVATE(o)           \
 	((NscConverterPrivate *)((NSC_CONVERTER(o))->priv))
@@ -121,6 +119,9 @@ nsc_converter_finalize (GObject *object)
 
 		if (priv->gst)
 			g_object_unref (priv->gst);
+
+		if (priv->settings)
+			g_object_unref (priv->settings);
 
 		if (priv->profile)
 			g_object_unref (priv->profile);
@@ -713,6 +714,7 @@ create_main_dialog (NscConverter *converter)
 	NscConverterPrivate *priv;
 	GtkBuilder          *gui;
 	GtkWidget           *hbox;
+	gboolean             src_dir;
 
 	priv = NSC_CONVERTER_GET_PRIVATE (converter);
 
@@ -729,7 +731,10 @@ create_main_dialog (NscConverter *converter)
 	 * Set the source directory if the user wants
 	 * to use that as the output destination.
 	 */
-	if (priv->src_dir) {
+	src_dir = g_settings_get_boolean (priv->settings,
+									  SOURCE_DIRECTORY);
+
+	if (src_dir) {
 		NautilusFileInfo *file_info;
 		gchar            *uri;
 
@@ -774,8 +779,6 @@ nsc_converter_init (NscConverter *self)
 	/* If correctly allocated, initialize parameters */
 	if ((NSC_CONVERTER (self))->priv != NULL) {
 		NscConverterPrivate *priv = NSC_CONVERTER_GET_PRIVATE (self);
-		GConfClient         *gconf;
-		GError              *error = NULL;
 
 		/* Set init values */
 		priv->gst = NULL;
@@ -783,25 +786,7 @@ nsc_converter_init (NscConverter *self)
 		priv->current_duration = 0;
 		priv->total_duration = 0;
 		priv->before.seconds = -1;
-
-		/* Get gconf client */
-		gconf = gconf_client_get_default ();
-		if (gconf == NULL) {
-			/* Should probably do more than just give a warning */
-			g_warning (_("Could not create GConf client.\n"));
-		}
-
-		priv->src_dir = gconf_client_get_bool (gconf,
-											   SOURCE_DIRECTORY,
-											   &error);
-
-		if (error) {
-			priv->src_dir = FALSE;
-			g_error_free (error);
-		}
-
-		/* Unreference the gconf client */
-		g_object_unref (gconf);
+		priv->settings = g_settings_new ("org.gnome.Nautilus.SoundConverter");
 
 		/* Set the profile to the default. */
 		priv->profile = rb_gst_get_encoding_profile (DEFAULT_MEDIA_TYPE);

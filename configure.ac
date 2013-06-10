@@ -17,9 +17,7 @@ AC_PROG_CC
 IT_PROG_INTLTOOL([0.40.6])
 LT_INIT
 AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
-
-AC_PATH_PROG(GCONFTOOL, gconftool-2)
-AM_GCONF_SOURCE_2
+GLIB_GSETTINGS
 
 GNOME_COMPILE_WARNINGS([maximum])
 GNOME_CXX_WARNINGS([yes])
@@ -29,9 +27,8 @@ GNOME_MAINTAINER_MODE_DEFINES
 dnl -----------------------------------------------------------
 dnl Set variables for minimum versions needed.
 dnl -----------------------------------------------------------
-GLIB_REQUIRED=2.16.0
+GLIB_REQUIRED=2.25.9
 NAUTILUS_REQUIRED=2.12.0
-GCONF_REQUIRED=1.2.0
 GTK_REQUIRED=2.90.3
 GSTREAMER_REQUIRED=0.11.92
 
@@ -41,7 +38,7 @@ dnl -----------------------------------------------------------
 PKG_CHECK_MODULES(NSC,
 [
 	glib-2.0 >= $GLIB_REQUIRED
-	gconf-2.0 >= $GCONF_REQUIRED
+	gio-2.0
 	libnautilus-extension >= $NAUTILUS_REQUIRED
 	gtk+-3.0 >= $GTK_REQUIRED
 	gstreamer-1.0 >= $GSTREAMER_REQUIRED

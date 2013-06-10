@@ -1,0 +1,9 @@
+<schemalist>
+  <schema id="org.gnome.Nautilus.SoundConverter" path="/nautilus-sound-converter/">
+    <key name="source-dir" type="b">
+      <default>true</default>
+      <summary>Use source directory as output directory</summary>
+      <description>Use the source directory as the default output directory.</description>
+    </key>
+  </schema>
+</schemalist>
