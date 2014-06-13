@@ -6,31 +6,36 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nautilus-sound-converter master\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-04 23:40+0300\n"
-"PO-Revision-Date: 2011-05-04 22:26+0200\n"
-"Last-Translator: Evangelos Vafeiadis <vagvaf@gmail.com>\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"product=nautilus-sound-converter&keywords=I18N+L10N\n"
+"POT-Creation-Date: 2013-12-19 15:53+0000\n"
+"PO-Revision-Date: 2014-06-12 09:19+0200\n"
+"Last-Translator: Maria Mavridou <mavridou@gmail.com>\n"
 "Language-Team: Greek <team@lists.gnome.gr>\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.4\n"
 
 #: ../data/main.ui.h:1
-msgid "<b>Destination</b>"
-msgstr "<b>Προορισμός</b>"
-
-#: ../data/main.ui.h:2
-msgid "<b>Format</b>"
-msgstr "<b>Μορφότυπο</b>"
-
-#: ../data/main.ui.h:3
 msgid "Convert Audio File"
 msgstr "Μετατροπή αρχείου ήχου"
 
-#: ../data/main.ui.h:4
+#: ../data/main.ui.h:2
 msgid "Select A Folder"
 msgstr "Επιλογή ενός φακέλου"
+
+#: ../data/main.ui.h:3
+#| msgid "<b>Destination</b>"
+msgid "Destination"
+msgstr "Προορισμός"
+
+#: ../data/main.ui.h:4
+#| msgid "<b>Format</b>"
+msgid "Format"
+msgstr "Μορφοποίηση"
 
 #: ../data/progress.ui.h:1
 msgid "Converting Progress"
@@ -38,114 +43,114 @@ msgstr "Πρόοδος μετατροπής"
 
 #: ../data/nautilus-sound-converter.schemas.in.h:1
 msgid "Use source directory as output directory"
-msgstr "Χρήση φακέλου εισόδου ως φακέλου εξόδου"
+msgstr "Χρήση καταλόγου προέλευσης ως κατάλογο εξόδου"
 
 #: ../data/nautilus-sound-converter.schemas.in.h:2
 msgid "Use the source directory as the default output directory."
-msgstr "Χρήση φακέλου εισόδου ως προεπιλεγμένου φακέλου εξόδου"
+msgstr "Χρήση καταλόγου προέλευσης ως προεπιλεγμένου καταλόγου εξόδου"
 
-#: ../src/nsc-converter.c:338
+#: ../src/nsc-converter.c:340
 #, c-format
 msgid "Converting: %d of %d"
 msgstr "Μετατροπή: %d από %d"
 
-#: ../src/nsc-converter.c:364
+#: ../src/nsc-converter.c:366
 #, c-format
 msgid ""
 "Nautilus Sound Converter could not convert this file.\n"
 "Reason: %s"
 msgstr ""
-"Ο Nautilus Sound Converter αδυνατεί να μετατρέψει το αρχείο\n"
-"Αιτία:%s"
+"Ο Μετατροπέας ήχου Nautilus αδυνατεί να μετατρέψει το αρχείο\n"
+"Αιτία: %s"
 
-#: ../src/nsc-converter.c:402 ../src/nsc-converter.c:618
+#: ../src/nsc-converter.c:404 ../src/nsc-converter.c:620
 msgid "Speed: Unknown"
 msgstr "Ταχύτητα: άγνωστη"
 
-#: ../src/nsc-converter.c:456
+#: ../src/nsc-converter.c:458
 #, c-format
 msgid "Estimated time left: %d:%02d (at %0.1f×)"
-msgstr "Εκτίμηση χρόνου που απομένει: ·%d:%02d (σε %0.1f×)"
+msgstr "Εκτίμηση χρόνου που απομένει: %d:%02d (σε %0.1f×)"
 
-#: ../src/nsc-converter.c:461
+#: ../src/nsc-converter.c:463
 msgid "Estimated time left: unknown"
 msgstr "Εκτίμηση χρόνου που απομένει: άγνωστο"
 
 #. Create edit profile button
-#: ../src/nsc-converter.c:696
+#: ../src/nsc-converter.c:698
 msgid "Edit _Profiles..."
 msgstr "Επεξεργασία _προφίλ…"
 
 #. Should probably do more than just give a warning
-#: ../src/nsc-converter.c:743
+#: ../src/nsc-converter.c:745
 msgid "Could not create GConf client.\n"
 msgstr "Αδυναμία δημιουργίας πελάτη GConf \n"
 
-#: ../src/nsc-extension.c:166
+#: ../src/nsc-extension.c:170
 msgid "_Convert..."
-msgstr "Μετατροπή..."
+msgstr "_Μετατροπή..."
 
-#: ../src/nsc-extension.c:168
+#: ../src/nsc-extension.c:172
 msgid "Convert each selected audio file"
 msgstr "Μετατροπή κάθε επιλεγμένου αρχείου ήχου"
 
-#: ../src/nsc-gstreamer.c:193
+#: ../src/nsc-gstreamer.c:194
 msgid "Audio Profile"
 msgstr "Προφίλ ήχου"
 
-#: ../src/nsc-gstreamer.c:194
+#: ../src/nsc-gstreamer.c:195
 msgid "The GNOME Audio Profile used for encoding audio"
 msgstr "Το προφίλ ήχου GNOME που χρησιμοποιείται για την αποκωδικοποίηση ήχου"
 
-#: ../src/nsc-gstreamer.c:381 ../src/nsc-gstreamer.c:390
+#: ../src/nsc-gstreamer.c:374 ../src/nsc-gstreamer.c:383
 #, c-format
 msgid "Could not create GStreamer file input"
 msgstr "Αδυναμία δημιουργίας αρχείου εισόδου GStreamer"
 
-#: ../src/nsc-gstreamer.c:399
+#: ../src/nsc-gstreamer.c:392
 #, c-format
 msgid "Could not create GStreamer encoders for %s"
 msgstr "Αδυναμία δημιουργίας κωδικοποιητών GStreamer για (%s)"
 
-#: ../src/nsc-gstreamer.c:414
+#: ../src/nsc-gstreamer.c:407
 #, c-format
 msgid "Could not create GStreamer file output"
 msgstr "Αδυναμία δημιουργίας αρχείου εξόδου GStreamer"
 
-#: ../src/nsc-gstreamer.c:436 ../src/nsc-gstreamer.c:444
+#: ../src/nsc-gstreamer.c:421 ../src/nsc-gstreamer.c:429
 #, c-format
 msgid "Could not link pipeline"
-msgstr "Αποτυχία δημιουργίας δεσμού στο pipeline"
+msgstr "Αδυναμία σύνδεσης διοχέτευσης"
 
-#: ../src/nsc-gstreamer.c:479
+#: ../src/nsc-gstreamer.c:464
 msgid "Could not get current file position"
 msgstr "Αδυναμία λήψης θέσης τρέχοντος κομματιού"
 
-#: ../src/nsc-gstreamer.c:580
+#: ../src/nsc-gstreamer.c:565
 msgid "Could not get current file duration"
 msgstr "Αδυναμία λήψης διάρκειας τρέχοντος κομματιού"
 
-#: ../src/nsc-gstreamer.c:648
+#: ../src/nsc-gstreamer.c:633
 #, c-format
 msgid "The plugin necessary for mp3 file access was not found"
-msgstr "Δε βρέθηκε το απαιτούμενο plugin για την πρόσβαση σε αρχεία mp3"
+msgstr "Δε βρέθηκε το απαιτούμενο πρόσθετο για την πρόσβαση σε αρχεία mp3"
 
-#: ../src/nsc-gstreamer.c:665
+#: ../src/nsc-gstreamer.c:650
 #, c-format
 msgid "The plugin necessary for wav file access was not found"
-msgstr "Δε βρέθηκε το απαιτούμενο plugin για την πρόσβαση σε αρχεία wav"
+msgstr "Δε βρέθηκε το απαιτούμενο πρόσθετο για την πρόσβαση σε αρχεία wav"
 
-#: ../src/nsc-gstreamer.c:683
+#: ../src/nsc-gstreamer.c:668
 #, c-format
 msgid "The plugin necessary for aac file access was not found"
-msgstr "Δε βρέθηκε το απαιτούμενο plugin για την πρόσβαση σε αρχεία aac"
+msgstr "Δε βρέθηκε το απαιτούμενο πρόσθετο για την πρόσβαση σε αρχεία aac"
 
-#: ../src/nsc-gstreamer.c:700
+#: ../src/nsc-gstreamer.c:685
 #, c-format
 msgid "The plugin necessary for musepack file access was not found"
-msgstr "Δε βρέθηκε το απαιτούμενο plugin για την πρόσβαση σε αρχεία musepack"
+msgstr "Δε βρέθηκε το απαιτούμενο πρόσθετο για την πρόσβαση σε αρχεία musepack"
 
-#: ../src/nsc-gstreamer.c:717
+#: ../src/nsc-gstreamer.c:702
 #, c-format
 msgid "The plugin necessary for wma file access was not found"
-msgstr "Δε βρέθηκε το απαιτούμενο plugin για την πρόσβαση σε αρχεία wma"
+msgstr "Δε βρέθηκε το απαιτούμενο πρόσθετο για την πρόσβαση σε αρχεία wma"
