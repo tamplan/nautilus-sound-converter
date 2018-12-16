@@ -10,7 +10,7 @@
   <download-page rdf:resource="https://code.google.com/archive/p/nautilus-sound-converter/downloads" />
 
   <homepage rdf:resource="http://live.gnome.org/NautilusSoundConverter" />
-  <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter" />
+  <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/nautilus-sound-converter/issues/" />
 
   <maintainer>
     <foaf:Person>
