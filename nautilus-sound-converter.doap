@@ -7,7 +7,7 @@
 
   <name xml:lang="en">nautilus-sound-converter</name>
   <shortdesc xml:lang="en">Nautilus extension to convert audio files formats</shortdesc>
-  <download-page rdf:resource="http://download.gnome.org/sources/nautilus-sound-converter/" />
+  <download-page rdf:resource="https://code.google.com/archive/p/nautilus-sound-converter/downloads" />
 
   <homepage rdf:resource="http://live.gnome.org/NautilusSoundConverter" />
   <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=nautilus-sound-converter" />
